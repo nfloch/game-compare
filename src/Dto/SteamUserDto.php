@@ -59,6 +59,24 @@ class SteamUserDto
             'openid.assoc_handle' => $this->openid_assoc_handle,
             'openid.signed' => $this->openid_signed,
             'openid.sig' => $this->openid_sig,
-            ];
+        ];
+    }
+
+    public static function fromRequest(Request $request): self
+    {
+        $steamCallback = new self;
+
+        $steamCallback->openid_ns = $request->get('openid_ns') ?? '';
+        $steamCallback->openid_mode = $request->get('openid_mode') ?? '';
+        $steamCallback->openid_op_endpoint = $request->get('openid_op_endpoint') ?? '';
+        $steamCallback->openid_claimed_id = $request->get('openid_claimed_id') ?? '';
+        $steamCallback->openid_identity = $request->get('openid_identity') ?? '';
+        $steamCallback->openid_return_to = $request->get('openid_return_to') ?? '';
+        $steamCallback->openid_response_nonce = $request->get('openid_response_nonce') ?? '';
+        $steamCallback->openid_assoc_handle = $request->get('openid_assoc_handle') ?? '';
+        $steamCallback->openid_signed = $request->get('openid_signed') ?? '';
+        $steamCallback->openid_sig = $request->get('openid_sig') ?? '';
+
+        return $steamCallback;
     }
 }

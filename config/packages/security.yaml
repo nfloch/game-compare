@@ -1,0 +1,29 @@
+security:
+    # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
+    providers:
+        # used to reload user from session & other features (e.g. switch_user)
+        steam_user_provider:
+            id: App\Security\SteamUserProvider
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            lazy: true
+            provider: steam_user_provider
+            custom_authenticators:
+                - App\Security\SteamAuthenticator
+            logout:
+                path: /logout
+
+            # activate different ways to authenticate
+            # https://symfony.com/doc/current/security.html#the-firewall
+
+            # https://symfony.com/doc/current/security/impersonating_user.html
+            # switch_user: true
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        - { path: ^/steam/login$, roles: PUBLIC_ACCESS }
+        - { path: ^/, roles: ROLE_USER }
