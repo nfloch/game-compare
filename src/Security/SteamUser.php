@@ -13,7 +13,7 @@ class SteamUser implements UserInterface
      */
     private $roles = [];
 
-    public function getUsername(): ?string
+    public function getUsername(): string
     {
         return $this->username;
     }
