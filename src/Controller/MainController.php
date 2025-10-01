@@ -17,6 +17,13 @@ final class MainController extends AbstractController
     )
     {
     }
+    #[Route('/', name: 'app_home')]
+    public function home(): Response
+    {
+        return $this->render('main/home.html.twig', [
+            'controller_name' => 'MainController',
+        ]);
+    }
 
     #[Route('/index', name: 'app_index')]
     public function index(#[CurrentUser] SteamUser $user): Response
